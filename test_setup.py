@@ -33,7 +33,8 @@ except Exception as e:
 print()
 print("3️⃣ Testing NASA client module...")
 try:
-    from src.data.nasa_client import nasa_client
+    from src.data.nasa_client import get_nasa_client
+    client = get_nasa_client()
     print("   ✅ NASA client imported successfully")
 except Exception as e:
     print(f"   ❌ Error: {e}")

@@ -263,5 +263,19 @@ class NASAClient:
             return None
 
 
-# Create a singleton instance
-nasa_client = NASAClient()
+# Singleton instance (lazy initialization)
+_nasa_client_instance = None
+
+
+def get_nasa_client() -> NASAClient:
+    """
+    Get the singleton NASAClient instance.
+    Uses lazy initialization to ensure Streamlit secrets are loaded first.
+    
+    Returns:
+        NASAClient: The NASA API client instance
+    """
+    global _nasa_client_instance
+    if _nasa_client_instance is None:
+        _nasa_client_instance = NASAClient()
+    return _nasa_client_instance

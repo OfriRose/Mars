@@ -5,7 +5,7 @@ A dashboard for real-time Martian weather and rover imagery from NASA.
 
 import streamlit as st
 
-from src.data.nasa_client import nasa_client
+from src.data.nasa_client import get_nasa_client
 from src.ui import (
     render_weather_metrics,
     render_temperature_chart,
@@ -94,7 +94,7 @@ def main():
         st.header("🌡️ Martian Weather Conditions")
         
         with st.spinner("Fetching Mars weather data..."):
-            weather_df = nasa_client.get_mars_weather()
+            weather_df = get_nasa_client().get_mars_weather()
         
         # Display weather metrics
         render_weather_metrics(weather_df, temp_unit)
@@ -112,7 +112,7 @@ def main():
         st.header(f"📸 {selected_rover.capitalize()} Rover Photos")
         
         with st.spinner(f"Loading latest photos from {selected_rover.capitalize()}..."):
-            photos = nasa_client.get_rover_photos(
+            photos = get_nasa_client().get_rover_photos(
                 rover_name=selected_rover,
                 num_photos=config.DEFAULT_NUM_PHOTOS
             )

@@ -5,7 +5,7 @@ Photo gallery UI components for Mars Explorer Hub.
 import streamlit as st
 from typing import List, Dict, Optional
 
-from src.data.nasa_client import nasa_client
+from src.data.nasa_client import get_nasa_client
 
 
 def render_photo_gallery(photos: Optional[List[Dict]]) -> None:
@@ -29,7 +29,7 @@ def render_photo_gallery(photos: Optional[List[Dict]]) -> None:
         
         with cols[col_idx]:
             # Load and display image
-            img = nasa_client.load_image_from_url(photo['img_src'])
+            img = get_nasa_client().load_image_from_url(photo['img_src'])
             
             if img:
                 st.image(img, use_container_width=True)
